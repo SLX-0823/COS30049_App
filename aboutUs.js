@@ -13,7 +13,7 @@ import Nav from './nav';
 SplashScreen.preventAutoHideAsync();
 
 
-const MainMenuScreen = () => {
+const AboutUsScreen = () => {
     const navigation = useNavigation();
     const [fontsLoaded, setFontsLoaded] = useState(false);
 
@@ -53,7 +53,7 @@ const MainMenuScreen = () => {
             </View>
 
             <View style={styles.main}>
-                <Text style={styles.text}>Main Page!</Text>
+                <Text style={styles.text}>About Us Page!</Text>
             </View>
             
         </View>
@@ -105,4 +105,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default MainMenuScreen;
+export default AboutUsScreen;

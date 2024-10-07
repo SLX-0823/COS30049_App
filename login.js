@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     marginTop: 30,
+    marginLeft: -10,
     flex: 1,
     flexDirection: 'row',
     marginBottom: -150,
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: colors.secondary,
     borderWidth: 1,
     marginBottom: 12,
     paddingHorizontal: 8,
@@ -118,17 +119,17 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     marginBottom: 16,
-    color: colors.secondary,
+    color: colors.primary,
     fontFamily: 'Alike',
   },
   button: {
-    backgroundColor: colors.accent, // Use your color variable for the button background
+    backgroundColor: colors.primary, // Use your color variable for the button background
     padding: 10,
     alignItems: 'center',
     borderRadius: 5,
   },
   buttonText: {
-    color: colors.secondary, // Change this to your desired text color
+    color: colors.text, // Change this to your desired text color
     fontSize: 16,
     fontFamily: 'SegoeUI',
   },
@@ -137,11 +138,11 @@ const styles = StyleSheet.create({
     marginTop: 16, // Space between the button and sign-up text
   },
   signUpText: {
-    color: colors.secondary,
+    color: colors.text,
     fontFamily: 'SegoeUI',
   },
   signUpLink: {
-    color: 'red',
+    color: colors.secondary,
     textDecorationLine: 'underline',
     fontFamily: 'SegoeUI',
   },
