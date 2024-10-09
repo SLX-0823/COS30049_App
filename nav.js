@@ -36,20 +36,34 @@ const Nav = () => {
                     <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate('Dashboard')}>
                         <Text style={styles.navItem}>Dashboard</Text>
                     </TouchableOpacity>
+
+
                     <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate('Donation')}>
                         <Text style={styles.navItem}>Donation</Text>
                     </TouchableOpacity>
+
+
                     <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate('Education')}>
                         <Text style={styles.navItem}>Learn</Text>
                     </TouchableOpacity>
+
+
                     <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate('Community')}>
                         <Text style={styles.navItem}>Community</Text>
                     </TouchableOpacity>
+
+
                     <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate('AboutUs')}>
                         <Text style={styles.navItem}>About Us</Text>
                     </TouchableOpacity>
+
+
                     <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate('ContactUs')}>
                         <Text style={styles.navItem}>Contact Us</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={[styles.navButton, styles.logoutButton]} onPress={() => navigation.navigate('Login')}>
+                        <Text style={[styles.navItem, styles.logoutText]}>Logout</Text>
                     </TouchableOpacity>
                 </Animated.View>
             )}
@@ -113,6 +127,13 @@ const styles = StyleSheet.create({
     },
     text: {
         color: colors.text,
+    },
+    logoutButton: {
+        backgroundColor: colors.primary,
+        marginTop: '67%',
+    },
+    logoutText: {
+        color: colors.accent,
     },
 });
 

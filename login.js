@@ -5,9 +5,7 @@ import colors from './colors';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useNavigation } from '@react-navigation/native';
-
-
-
+import API from './apiConfig';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -20,14 +18,13 @@ const LoginScreen = () => {
   useEffect(() => {
     async function loadFontsAndHideSplash() {
       try {
-        // Load fonts asynchronously
         await Font.loadAsync({
           'Alike': require('./assets/fonts/Alike-Regular.ttf'),
           'SegoeUI': require('./assets/fonts/Segoe UI.ttf'),
         });
 
-        setFontsLoaded(true); // Mark fonts as loaded
-        await SplashScreen.hideAsync(); // Hide splash screen once fonts are loaded
+        setFontsLoaded(true);
+        await SplashScreen.hideAsync();
       } catch (error) {
         console.warn(error);
       }
@@ -40,9 +37,29 @@ const LoginScreen = () => {
     return null; // Return null while fonts are loading
   }
 
-  const handleLogin = () => {
-    // Add your login logic here
-    navigation.navigate('MainMenu'); // for now just navigate to main menu
+  const handleLogin = async () => {
+    // Login Logic
+    try {
+      const response = await fetch(`${API}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: username,  // Use username for the email field
+          password,
+        }),
+      });
+  
+      const data = await response.json();
+      if (data.success) {
+        navigation.navigate('MainMenu');
+      } else {
+        console.error('Login failed:', data.message);
+      }
+    } catch (error) {
+      console.error('Error occurred: ', error);
+    }
   };
 
   return (
@@ -52,33 +69,33 @@ const LoginScreen = () => {
         <Text style={styles.header}>Orangutan Oasis</Text>
       </View>
 
-        <View style = {styles.main}> 
-            <Text style={styles.title}>Login</Text>
-            <TextInput 
-                style={styles.input} 
-                placeholder="Username" 
-                placeholderTextColor={colors.text} // Set your desired placeholder color here
-                value={username} 
-                onChangeText={setUsername} 
-            />
-            <TextInput 
-                style={styles.input} 
-                placeholder="Password" 
-                placeholderTextColor={colors.text} // Set your desired placeholder color here
-                value={password} 
-                onChangeText={setPassword} 
-                secureTextEntry 
-            />
-            <TouchableOpacity style={styles.button} onPress={handleLogin}>
-                <Text style={styles.buttonText}>Login</Text>
-            </TouchableOpacity>
-            <View style={styles.signUpContainer}>
-                <Text style={styles.signUpText}>Haven't had an account? </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-                    <Text style={styles.signUpLink}>Sign up now!</Text>
-                </TouchableOpacity>
-            </View>
+      <View style={styles.main}>
+        <Text style={styles.title}>Login</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          placeholderTextColor={colors.text}
+          value={username}
+          onChangeText={setUsername}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor={colors.text}
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+        <View style={styles.signUpContainer}>
+          <Text style={styles.signUpText}>Haven't had an account? </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+            <Text style={styles.signUpLink}>Sign up now!</Text>
+          </TouchableOpacity>
         </View>
+      </View>
     </View>
   );
 };
