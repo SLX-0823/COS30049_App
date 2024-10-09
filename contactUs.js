@@ -53,7 +53,7 @@ const ContactUsScreen = () => {
             </View>
 
             <View style={styles.main}>
-                <Text style={styles.text}>Contact Us Page!</Text>
+                <Text style={styles.title}>Contact Us</Text>
             </View>
             
         </View>
@@ -99,6 +99,11 @@ const styles = StyleSheet.create({
     main: {
         marginTop: 130,
         padding: 10,
+    },
+    title: {
+        color: colors.primary,
+        fontSize: 40,
+        fontFamily: 'Alike',
     },
     text: {
         color: colors.text,
