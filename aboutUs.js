@@ -71,13 +71,13 @@ const AboutUsScreen = () => {
                 </Text>
 
                 <Text style={styles.text}>
-                    - Provide thorough monitoring programs to protect the habitats of orangutans.
+                    • Provide thorough monitoring programs to protect the habitats of orangutans.
                 </Text>
                 <Text style={styles.text}>
-                    - By giving visitors access to precise information and chances to see wildlife, you can improve their experience.
+                    • By giving visitors access to precise information and chances to see wildlife, you can improve their experience.
                 </Text>
                 <Text style={styles.text}>
-                    - Encourage environmentally conscious travel and education.
+                    • Encourage environmentally conscious travel and education.
                 </Text>
    
                     <Text style={styles.text}>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, TextInput, Alert } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import Logo from './assets/logo.svg';
 import colors from './colors';
 import * as Font from 'expo-font';
@@ -7,10 +8,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { initStripe, useStripe } from '@stripe/stripe-react-native';
 import { useNavigation } from '@react-navigation/native';
 import Nav from './nav';
-import API from './apiConfig';
-
-// Publishable key
-const PUBLIC_KEY = 'pk_test_51Q7Vg4FJbGru8hWsdZPXnrROebwctEkPFPMMf8WPZU7Rnfrfolj1a6sJ4hWxOW5j18E8cU9Djr3WnlmLhLR2UtoQ00ZpPEuVWV';
+import config from './config';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -42,7 +40,7 @@ const DonationScreen = () => {
     useEffect(() => {
         async function initialize() {
             await initStripe({
-                publishableKey: PUBLIC_KEY,
+                publishableKey: config.CLIENT_PUBLISHABLE_KEY,
             });
         }
         initialize().catch(console.error);
@@ -57,8 +55,7 @@ const DonationScreen = () => {
     const fetchPaymentIntent = async () => {
         try {
             const amountInCents = parseFloat(amount) * 100;
-            console.log('Fetching client secret...');
-            const response = await fetch(`${API}/payment`, {
+            const response = await fetch(`${config.SERVER}/payment`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -80,7 +77,6 @@ const DonationScreen = () => {
     const handleProceedToConfirmation = async () => {
         if (amount && currency) {
             const secret = await fetchPaymentIntent(); // Fetch the payment intent and move to step 2
-            console.log(secret);
             if (secret) {
                 setStep(2);
             }
@@ -117,7 +113,7 @@ const DonationScreen = () => {
             Alert.alert('Payment successful', 'Your payment has been confirmed!');
             // Confirm the payment with the server
             try {
-                const response = await fetch(`${API}/payment-confirm`, {
+                const response = await fetch(`${config.SERVER}/payment-confirm`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ clientSecret, amount }), // Send the clientSecret for confirmation
@@ -153,13 +149,17 @@ const DonationScreen = () => {
                 onChangeText={setAmount}
                 style={styles.input}
             />
-            <TextInput
-                placeholder="Currency (e.g., 'usd')"
-                placeholderTextColor='white'
-                value={currency}
-                onChangeText={setCurrency}
+
+
+            <Picker
+                selectedValue={currency}
+                onValueChange={(itemValue, itemIndex) => setCurrency(itemValue)}
                 style={styles.input}
-            />
+            >
+                <Picker.Item label="Select a currency" value="" />
+                <Picker.Item label="USD" value="usd" />
+                <Picker.Item label="MYR" value="myr" />
+            </Picker>
 
             <TouchableOpacity
                 style={styles.button}

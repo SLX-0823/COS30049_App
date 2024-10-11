@@ -5,7 +5,7 @@ import colors from './colors';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useNavigation } from '@react-navigation/native';
-import API from './apiConfig';
+import config from './config';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -40,7 +40,7 @@ const LoginScreen = () => {
   const handleLogin = async () => {
     // Login Logic
     try {
-      const response = await fetch(`${API}/login`, {
+      const response = await fetch(`${config.SERVER}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
