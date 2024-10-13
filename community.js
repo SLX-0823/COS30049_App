@@ -42,7 +42,7 @@ const CommunityScreen = () => {
         fetchPosts();
         const intervalId = setInterval(() => {
             fetchPosts();
-        }, 1000);
+        }, 500);    // every 0.5s fetch post for auto update
 
         return () => clearInterval(intervalId);
     }, []);
@@ -333,7 +333,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         padding: 15,
         marginLeft: -40,
-        width: '60%',
+        width: '65%',
         height: 50,
     },
     postUserName: {
@@ -366,7 +366,7 @@ const styles = StyleSheet.create({
     },
     postDate: {
         color: colors.secondary,
-        fontSize: 12,
+        fontSize: 10,
         fontFamily: 'SegoeUI',
         position: 'absolute',
         bottom: 10,
